@@ -1,0 +1,45 @@
+// Função para gerar IDs únicos
+function gerarId() {
+  return '_' + Math.random().toString(36).substr(2, 9);
+}
+
+// Lista de pessoas cadastradas
+let pessoas = [];
+
+// Função para cadastrar uma nova pessoa
+function cadastrarPessoa(pessoa) {
+  pessoa.id = gerarId();
+  pessoas.push(pessoa);
+}
+
+// Função para atualizar os dados de uma pessoa pelo ID
+function atualizarPessoa(id, dadosAtualizados) {
+  const pessoaIndex = pessoas.findIndex(pessoa => pessoa.id === id);
+  if (pessoaIndex !== -1) {
+    pessoas[pessoaIndex] = { ...pessoas[pessoaIndex], ...dadosAtualizados };
+  }
+}
+
+// Função para deletar uma pessoa pelo ID
+function deletarPessoa(id) {
+  pessoas = pessoas.filter(pessoa => pessoa.id !== id);
+}
+
+// Função para listar todas as pessoas cadastradas
+function listarPessoas() {
+  return pessoas;
+}
+
+// Exemplo de uso:
+
+// Cadastrar uma pessoa
+cadastrarPessoa({ nome: "Maria", idade: 30, cidade: "São Paulo" });
+
+// Atualizar os dados de uma pessoa
+atualizarPessoa(pessoas[0].id, { idade: 31, cidade: "Rio de Janeiro" });
+
+// Deletar uma pessoa
+deletarPessoa(pessoas[0].id);
+
+// Listar todas as pessoas cadastradas
+console.log(listarPessoas());
